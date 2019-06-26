@@ -21,11 +21,14 @@ public class ProductController {
 	
 	@GetMapping("/product/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable Long id){		
-		productService.findById(id).map(
+		return productService.findById(id).map(
 				product ->{
-					return ResponseEntity.notFound().build();
-				});
-		return null;
+					ResponseEntity
+							.ok()
+							.eTag(Integer.toString(product.getVersion()))
+							.body(product);
+				}
+				).orElse(ResponseEntity.notFound().build());
 //				.map(						
 //				product->{					
 //					try {
