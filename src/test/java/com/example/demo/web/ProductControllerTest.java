@@ -2,8 +2,8 @@ package com.example.demo.web;
 
 import com.example.demo.entities.Product;
 import com.example.demo.service.ProductService;
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
