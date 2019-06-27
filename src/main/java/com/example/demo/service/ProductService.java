@@ -18,4 +18,16 @@ public class ProductService {
 	public Optional<Product> findById(Long id){
 		return productRepository.findById(id);
 	}
+
+	public Iterable<Product> findAll(){
+		return productRepository.findAll();
+	}
+
+	public Product save(Product product){
+		return productRepository.save(product);
+	}
+
+	public Boolean update(Product product){
+		return productRepository.save(product)!=null;
+	}
 }
