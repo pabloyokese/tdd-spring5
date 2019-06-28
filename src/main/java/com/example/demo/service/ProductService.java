@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -19,11 +20,12 @@ public class ProductService {
 		return productRepository.findById(id);
 	}
 
-	public Iterable<Product> findAll(){
+	public List<Product> findAll(){
 		return productRepository.findAll();
 	}
 
 	public Product save(Product product){
+		product.setVersion(1);
 		return productRepository.save(product);
 	}
 

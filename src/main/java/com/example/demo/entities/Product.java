@@ -20,6 +20,13 @@ public class Product {
 	private String name;
 	private Integer quantity;
 	private Integer version;
+
+	public Product(Long id ,String name, Integer quantity){
+		this.id = id;
+		this.name = name;
+		this.quantity = quantity;
+	}
+
 	public Product(String name, Integer quantity){
 		this.name = name;
 		this.quantity = quantity;
