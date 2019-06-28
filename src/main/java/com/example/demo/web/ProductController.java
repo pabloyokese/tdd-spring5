@@ -32,7 +32,7 @@ public class ProductController {
 						return ResponseEntity
 								.ok()
 								.eTag(Integer.toString(product.getVersion()))
-								.location(new URI("product/" + product.getId()))
+								.location(new URI("/product/" + product.getId()))
 								.body(product);
 					}catch(URISyntaxException e){
 						return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -57,7 +57,7 @@ public class ProductController {
 
 		try{
 			return ResponseEntity
-					.created(new URI("product/" + newProduct.getId()))
+					.created(new URI("/product/" + newProduct.getId()))
 					.eTag(Integer.toString(newProduct.getVersion()))
 					.body(newProduct);
 		}catch(URISyntaxException e){
@@ -85,9 +85,9 @@ public class ProductController {
 				if(productService.update(p)){
 					return ResponseEntity
 							.ok()
-							.eTag(Integer.toString(product.getVersion()))
-							.location(new URI("product/" + product.getId()))
-							.body(product);
+							.eTag(Integer.toString(p.getVersion()))
+							.location(new URI("/product/" + p.getId()))
+							.body(p);
 				}else{
 					return ResponseEntity.notFound().build();
 				}
