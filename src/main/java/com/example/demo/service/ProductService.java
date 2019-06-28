@@ -30,4 +30,15 @@ public class ProductService {
 	public Boolean update(Product product){
 		return productRepository.save(product)!=null;
 	}
+
+	public Boolean delete(Long id){
+		boolean success;
+		try{
+			productRepository.deleteById(id);
+			success = true;
+		} catch (Exception e){
+			success = false;
+		}
+		return success;
+	}
 }

@@ -162,6 +162,49 @@ public class ProductControllerTest {
     }
 
 
+    @Test
+    @DisplayName("DELETE /product/1 - Success")
+    void testProductDeleteSuccess() throws Exception {
+        // Setup mocked product
+        Product mockProduct = new Product(1l, "Product Name", 10, 1);
+
+        // Setup the mocked service
+        doReturn(Optional.of(mockProduct)).when(service).findById(1l);
+        doReturn(true).when(service).delete(1l);
+
+        // Execute our DELETE request
+        mockMvc.perform(delete("/product/{id}", 1))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("DELETE /product/1 - Not Found")
+    void testProductDeleteNotFound() throws Exception {
+        // Setup the mocked service
+        doReturn(Optional.empty()).when(service).findById(1l);
+
+        // Execute our DELETE request
+        mockMvc.perform(delete("/product/{id}", 1))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("DELETE /product/1 - Failure")
+    void testProductDeleteFailure() throws Exception {
+        // Setup mocked product
+        Product mockProduct = new Product(1l, "Product Name", 10, 1);
+
+        // Setup the mocked service
+        doReturn(Optional.of(mockProduct)).when(service).findById(1l);
+        doReturn(false).when(service).delete(1l);
+
+        // Execute our DELETE request
+        mockMvc.perform(delete("/product/{id}", 1))
+                .andExpect(status().isInternalServerError());
+    }
+
+
+
     static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
